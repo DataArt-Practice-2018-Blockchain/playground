@@ -42,4 +42,8 @@ public class User {
     public void setTimesGreeted(Integer timesGreeted) {
         this.timesGreeted = timesGreeted;
     }
+
+    public void incrementTimesGreeted() {
+        this.timesGreeted++;
+    }
 }

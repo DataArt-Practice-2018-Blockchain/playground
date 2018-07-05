@@ -27,7 +27,7 @@ public class GreetingController {
             user = users.get(0);
         }
 
-        user.setTimesGreeted(user.getTimesGreeted() + 1);
+        user.incrementTimesGreeted();
 
         userRepository.save(user);
 
