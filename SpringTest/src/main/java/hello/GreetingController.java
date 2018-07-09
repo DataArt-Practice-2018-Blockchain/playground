@@ -6,17 +6,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
 
 @RestController
 public class GreetingController {
-    private static final String template = "Hello %s";
 
     @Autowired
     private UserRepository userRepository;
 
     @RequestMapping("/hello")
-    public Greeting greeting(@RequestParam(value = "name", defaultValue = "there") String name) {
+    public String greeting(@RequestParam(value = "name", defaultValue = "unknown") String name) {
 
         List<User> users = userRepository.findByName(name);
 
@@ -31,6 +29,6 @@ public class GreetingController {
 
         userRepository.save(user);
 
-        return new Greeting(user.getTimesGreeted(), String.format(template, name));
+        return new Greeting(user.getTimesGreeted(), name).toHTML();
     }
 }
