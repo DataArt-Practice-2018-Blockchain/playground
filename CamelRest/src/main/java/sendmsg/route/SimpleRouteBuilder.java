@@ -7,10 +7,11 @@ import org.springframework.stereotype.Component;
 public class SimpleRouteBuilder extends RouteBuilder {
     @Override
     public void configure() throws Exception {
-        from("direct:rest-input")
-                .to("direct:sout");
+        from("direct:insertMsg")
+                .to("mongodb:mongo?database=test&collection=msgs&operation=insert");
 
-        from("direct:sout")
-                .to("stream:out");
+        from("direct:findMsgByQuery")
+                .to("mongodb:mongo?database=test&collection=msgs&operation=findOneByQuery");
     }
+
 }
